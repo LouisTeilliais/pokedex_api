@@ -2,37 +2,121 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  overflow-y: visible;
+  overflow-x: hidden;
+  font-size: 1.15rem;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #a1a1a1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.pokemon-header {
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 0.25rem;
+  font-weight: 600;
+  color: #000000;
+  display: flex;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  margin: 1rem 2rem;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.image-pokedex {
+  width: 5vh;
+  height: 5vh;
+}
+
+.button-next-pokemons {
+  cursor: pointer;
+  background-color: #0075be;
+  color: #ffcc00;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  border: none;
+  transition: 200ms ease-in-out;
+}
+
+.btn {
+  margin-bottom: 5rem;
+}
+
+/* List items */
+.collection-container {
   color: white;
+  margin-top: 2rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.App-link {
-  color: #61dafb;
+.pokemon-name {
+  margin-top: 0.5rem;
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pokemon-id {
+  margin-top: 0.5rem;
+  color: black;
+}
+.pokemon-type {
+  margin-top: 0.5rem;
+  color: black;
+}
+
+.pokemon-list-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f1de;
+  margin: 1rem;
+  padding: 0 1rem;
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  width: 15vh;
+  height: 30vh;
+}
+
+.ground {
+  background-color: rgba(151, 113, 0, 0.582);
+}
+.rock {
+  background-color: #867d7d;
+}
+.electric {
+  background-color: rgba(255, 204, 0);
+}
+.bug {
+  background-color: #7b834a;
+}
+.poison {
+  background-color: #7b316a;
+}
+.normal {
+  background-color: #f4f4f4;
+}
+.fairy {
+  background-color: #e67b7b;
+}
+.fire {
+  background-color: #e63900;
+}
+.grass {
+  background-color: #73ac31;
+}
+.water {
+  background-color: #5ebdfc;
+}
+.psychic {
+  background-color: #b080d0;
 }

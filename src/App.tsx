@@ -1,24 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import axios from 'axios';
+import PokemonCollection from './components/PokemonCollection';
+import { Pokemon, Pokemons } from './interface/pokemon';
 
-function App() {
+function  App() {
+
+  const [pokemons, setPokemons] = useState<Pokemon[]>([])
+  const [nextUrl, setNextUrl] = useState<string>("")
+  // to prevent double api call 
+  const renderAfterCalled = useRef(false);
+
+  useEffect(() => {
+    
+    if (!renderAfterCalled.current) {
+      
+      const getPokemons = async () => {
+        const res = await axios.get(
+          'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
+        )
+
+        setNextUrl(res.data.next)
+          
+        res.data.results.forEach(async (pokemon: Pokemons) => {
+          const poke = await axios.get(
+            `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+          )
+          setPokemons((p) => [...p, poke.data].sort((a,b) => a.id - b.id))
+        })
+      }
+      getPokemons()
+      renderAfterCalled.current = true;
+    }
+  },[])
+
+  const nextPokemons = async () => {
+    
+    const res = await axios(nextUrl)
+    
+    setNextUrl(res.data.next)
+
+    res.data.results.forEach(async (pokemon: Pokemons) => {
+      const poke = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+      )
+      setPokemons((p) => [...p, poke.data].sort((a,b) => a.id - b.id))
+    })
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <div className="container">
+      <header className="pokemon-header">
+        <img src='pokedex.png' className='image-pokedex'></img>
+        Pokédex
+        <img src='pokedex.png' className='image-pokedex'></img>
       </header>
+      <PokemonCollection pokemons={pokemons}/>
+      <div className='btn'>
+        <button className="button-next-pokemons" onClick={nextPokemons}>Charger plus</button>
+      </div>
+      </div>
     </div>
   );
 }
