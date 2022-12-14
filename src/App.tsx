@@ -17,7 +17,7 @@ function  App() {
       
       const getPokemons = async () => {
         const res = await axios.get(
-          'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
+          'https://pokeapi.co/api/v2/pokemon?limit=40&offset=0'
         )
 
         setNextUrl(res.data.next)
